@@ -6,11 +6,15 @@ This is a simple CRUD application built using the MEAN (MongoDB, Express, Angula
 
 ## How To Run
 
- Set your [Atlas URI connection string](https://docs.atlas.mongodb.com/getting-started/) as a parameter in `server/.env`.
+ Set your env variables at `server/.env`.
 
 ```
-ATLAS_URI=mongodb://localhost:27017/mean-stack-example
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_NAME=
 ```
+For reference you can use .env-example, just create a new file named .env and copy and paste.
 
 Note: Before starting the application, make sure mongo service is running locally on port 27017. If not check in windows services or start it explicitly with command prompt. Refer [this](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/) for more information.
 

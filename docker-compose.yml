@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+  frontend:
+    image: mikeangeloo/frontend-app:v1.0.0
+    container_name: frontend_app
+    ports:
+      - "80:80"
+    networks:
+      - mean-app
+
+  backend:
+    image: mikeangeloo/backend-app:v1.0.0
+    container_name: backend_app
+    environment:
+      DB_USER: appuser
+      DB_PASSWORD: apppassword123
+      DB_HOST: mongoDB
+      DB_NAME: meanStackExample
+    ports:
+      - "5200:5200"
+    networks:
+      - mean-app
+    depends_on:
+      - mongoDB
+  
+  mongoDB:
+    image: mongo
+    container_name: mongoDB
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: appuser
+      MONGO_INITDB_ROOT_PASSWORD: apppassword123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    networks:
+      - mean-app
+
+networks:
+  mean-app:
+    driver: bridge
+
+volumes:
+  mongodb:
